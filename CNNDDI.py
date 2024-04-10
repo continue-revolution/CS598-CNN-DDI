@@ -96,7 +96,6 @@ def prepare(df_drug, feature_list, vector_size, mechanism, action, drugA, drugB)
     
     print("******new_feature.shape*********\n", new_feature.shape)
     print("******new_label.shape*******\n", new_label.shape)
-    print("********event_num*******\n", event_num)
     
     return (new_feature, new_label, event_num)
 
@@ -127,7 +126,7 @@ def feature_vector(feature_name, df):
             df_feature[each_feature].iloc[i] = 1
             
     sim_matrix = Jaccard(np.array(df_feature))
-    print("sim_matrix.shape: ", sim_matrix.shape)
+    # print("sim_matrix.shape: ", sim_matrix.shape)
     # print(feature_name + " len is:" + str(len(sim_matrix[0])))
 
     '''
@@ -426,7 +425,7 @@ def main(args):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("-f","--featureList",default=["target"],help="features to use",nargs="+")
+    parser.add_argument("-f","--featureList",default=["pathway", "target", "enzyme", "category"],help="features to use",nargs="+")
     parser.add_argument("-c","--classifier",choices=["DDIMDL","RF","KNN","LR"],default=["DDIMDL"],help="classifiers to use",nargs="+")
     # parser.add_argument("-p","--NLPProcess",choices=["read","process"],default="read",help="Read the NLP extraction result directly or process the events again")
     args=vars(parser.parse_args())
